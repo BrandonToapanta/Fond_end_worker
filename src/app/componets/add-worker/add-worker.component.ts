@@ -8,6 +8,9 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
+import { ApiService } from '../../service/api.service';
+import { IProvincia } from '../../models/provincia.model';
+
 
 
 @Component({
@@ -18,11 +21,12 @@ import {
   styleUrl: './add-worker.component.css',
 })
 export class AddWorkerComponent {
+  provinciaList: IProvincia[] = [];
 
   imageUrl: string | ArrayBuffer | null = null;
   formularioEjemplo!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
     this.formularioEjemplo = this.formBuilder.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -47,6 +51,13 @@ export class AddWorkerComponent {
       JornadaParcial: ['', Validators.required],
       ObservacionesEmpresariales: [''],
     });
+  }
+
+  ngOnInit(): void {
+    this.apiService.getprovinciaList().subscribe((data: IProvincia[]) => {
+      this.provinciaList = data;
+    });
+
   }
 
 

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ApiService } from '../../service/api.service';
 
 
 
@@ -11,5 +12,18 @@ import { RouterLink } from '@angular/router';
   templateUrl: './report-general.component.html',
   styleUrl: './report-general.component.css',
 })
-export class ReportGeneralComponent {
+export class ReportGeneralComponent implements OnInit {
+  provincia: any;
+
+  constructor(private apiService: ApiService) {
+
+  }
+
+  ngOnInit(): void {
+    this.apiService.getprovinciaList().subscribe(data => {
+      this.provincia = data;
+      console.log(this.provincia);
+    });
+
+  }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IProvincia } from '../models/provincia.model';
 
 
 @Injectable({
@@ -8,13 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private http = inject(HttpClient)
 
-  private urlPrivincia: string ='http://localhost/ejercicio-backend/provincia.php';
+  urlPrivincia: string ='http://localhost/ejercicio-backend/provincia.php';
 
+  constructor(private clietHttp :HttpClient ){}
 
-  getProvincia():Observable<any>{
-    return this.http.get<any>(this.urlPrivincia);
+  getprovinciaList(): Observable<IProvincia[]>{
+    return this.clietHttp.get<IProvincia[]>(this.urlPrivincia);
   }
 
 }

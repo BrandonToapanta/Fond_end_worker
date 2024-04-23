@@ -14,9 +14,6 @@ export class EditWorkerComponent implements OnInit {
   private apiService = inject(ApiService);
 
   ngOnInit(): void {
-    this.apiService.getProvincia().subscribe((data:any[])=>{
-      this.provinciaList=data
-    })
 
   }
 
