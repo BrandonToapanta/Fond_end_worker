@@ -1,0 +1,55 @@
+<div class="container mt-3">
+  <form>
+    <label class="position-relative text-warning">Nombre:</label>
+    <input
+      class="alert alert-info mx-3 py-0 px-1 col-sm-8 col-lg-3"
+      type="text"
+    />
+    <label class="position-relative text-warning">Codigo Empleado:</label>
+    <input
+      class="alert alert-info mx-3 py-0 px-1 col-sm-6 col-lg-3"
+      type="text"
+    />
+    <input
+      class="btn btn-info rounded-pill py-1 px-3"
+      type="submit"
+      value="Buscar"
+    />
+  </form>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Codigo</th>
+        <th scope="col">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="">
+          <td class="text-uppercase">Brandon Ramiro Toapanta Basantes</td>
+          <td>3</td>
+          <td class="text-uppercase">VIGENTE</td>
+      </tr>
+      <tr class="">
+          <td class="text-uppercase">Brandon Ramiro Toapanta Basantes</td>
+          <td>3</td>
+          <td class="text-uppercase">VIGENTE</td>
+      </tr>
+    </tbody>
+    <tfoot class="table-footer-group">
+      <tr class="text-center">
+        <td colspan="3">
+          Unicamente se estan desplegando los primero 20 registros, si no
+          encuentra la informacion deseada por favor utilice los filtros de la
+          parte superior.
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="d-flex justify-content-center">
+    <a class="btn btn-success mx-4" routerLink="add-worker">Crear</a>
+    <a class="btn btn-warning mx-4" routerLink="report-general">Reporte</a>
+    <a class="btn btn-danger mx-4" routerLink="#">Salir</a>
+  </div>
+</div>
