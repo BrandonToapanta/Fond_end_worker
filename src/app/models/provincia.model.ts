@@ -16,14 +16,14 @@ export interface IEmpleadoAdd {
   emp_cedula: string;
   emp_fec_nacimiento: Date;
   emp_correo: string;
-  emp_obs_pers: string;
-  emp_foto: string | undefined;
+  emp_obs_pers?: string;
+  emp_foto?: string | undefined;
   emp_fec_ingreso: Date;
   emp_cargo: string;
   emp_departamento: string;
   emp_salario: number;
   emp_jor_parcial: string;
-  emp_obs_lab: string;
+  emp_obs_lab?: string;
   provPersona_id: number;
   provLaboral_id: number;
 }

@@ -19,7 +19,6 @@ export class ListWorkersComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getempleadosList().subscribe((data: IEmpleados[]) => {
       this.empleadosList = data;
-      console.log(data)
     });
   }
 }

@@ -1,12 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, } from '@angular/forms';
 
 import { ApiService } from '../../service/api.service';
 import { IProvincia } from '../../models/provincia.model';
@@ -21,14 +16,14 @@ import { IProvincia } from '../../models/provincia.model';
   templateUrl: './add-worker.component.html',
   styleUrl: './add-worker.component.css',
 })
-export class AddWorkerComponent {
+export class AddWorkerComponent implements OnInit {
   provinciaList: IProvincia[] = [];
-  imagenBase64?:string ='';
+  imagenBase64?: string = '';
 
   imageUrl: string | ArrayBuffer | null = null;
   formularioEjemplo!: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private apiService: ApiService) {
+  constructor(public formBuilder: FormBuilder, private apiService: ApiService, private Route: Router) {
     this.formularioEjemplo = this.formBuilder.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -62,7 +57,7 @@ export class AddWorkerComponent {
 
   }
 
-  formulario():any {
+  formulario(): any {
     let empleado = {
       emp_nombres: this.formularioEjemplo.value.nombres,
       emp_apellidos: this.formularioEjemplo.value.apellidos,
@@ -80,8 +75,8 @@ export class AddWorkerComponent {
       provPersona_id: this.formularioEjemplo.value.provincia,
       provLaboral_id: this.formularioEjemplo.value.prvinciaEmpresa,
     }
-    console.log(this.formularioEjemplo.valid)
     this.apiService.postempleado(empleado).subscribe();
+    this.Route.navigateByUrl('');
   }
 
   ContinuarForm() {
