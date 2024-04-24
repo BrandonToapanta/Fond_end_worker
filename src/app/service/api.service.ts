@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IProvincia } from '../models/provincia.model';
+import { IProvincia, IEmpleados, IEmpleadoAdd } from '../models/provincia.model';
 
 
 @Injectable({
@@ -10,12 +10,20 @@ import { IProvincia } from '../models/provincia.model';
 export class ApiService {
 
 
-  urlPrivincia: string ='http://localhost/ejercicio-backend/provincia.php';
+  url: string ='http://localhost/ejercicio-backend/';
 
   constructor(private clietHttp :HttpClient ){}
 
   getprovinciaList(): Observable<IProvincia[]>{
-    return this.clietHttp.get<IProvincia[]>(this.urlPrivincia);
+    return this.clietHttp.get<IProvincia[]>(`${this.url}provincia.php`);
+  }
+
+  getempleadosList(): Observable<IEmpleados[]>{
+    return this.clietHttp.get<IEmpleados[]>(`${this.url}empleados.php`);
+  }
+
+  postempleado(datosEmpleado: IEmpleadoAdd): Observable<any> {
+    return this.clietHttp.post(`${this.url}empleados.php`,datosEmpleado);
   }
 
 }

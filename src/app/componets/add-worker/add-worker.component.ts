@@ -13,6 +13,7 @@ import { IProvincia } from '../../models/provincia.model';
 
 
 
+
 @Component({
   selector: 'app-add-worker',
   standalone: true,
@@ -22,11 +23,12 @@ import { IProvincia } from '../../models/provincia.model';
 })
 export class AddWorkerComponent {
   provinciaList: IProvincia[] = [];
+  imagenBase64?:string ='';
 
   imageUrl: string | ArrayBuffer | null = null;
   formularioEjemplo!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) {
+  constructor(public formBuilder: FormBuilder, private apiService: ApiService) {
     this.formularioEjemplo = this.formBuilder.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -60,6 +62,27 @@ export class AddWorkerComponent {
 
   }
 
+  formulario():any {
+    let empleado = {
+      emp_nombres: this.formularioEjemplo.value.nombres,
+      emp_apellidos: this.formularioEjemplo.value.apellidos,
+      emp_cedula: this.formularioEjemplo.value.cedula,
+      emp_fec_nacimiento: this.formularioEjemplo.value.Fnacimiento,
+      emp_correo: this.formularioEjemplo.value.email,
+      emp_obs_pers: this.formularioEjemplo.value.ObservacionesPerson,
+      emp_foto: this.imagenBase64,
+      emp_fec_ingreso: this.formularioEjemplo.value.FIngreso,
+      emp_cargo: this.formularioEjemplo.value.cargo,
+      emp_departamento: this.formularioEjemplo.value.departamento,
+      emp_salario: this.formularioEjemplo.value.salario,
+      emp_jor_parcial: this.formularioEjemplo.value.JornadaParcial,
+      emp_obs_lab: this.formularioEjemplo.value.ObservacionesEmpresariales,
+      provPersona_id: this.formularioEjemplo.value.provincia,
+      provLaboral_id: this.formularioEjemplo.value.prvinciaEmpresa,
+    }
+    console.log(this.formularioEjemplo.valid)
+    this.apiService.postempleado(empleado).subscribe();
+  }
 
   ContinuarForm() {
     const parteEmail = document.getElementById('email');
@@ -100,16 +123,13 @@ export class AddWorkerComponent {
     }
   }
 
-  formulario() {
-    console.log(this.formularioEjemplo.value);
-  }
-
   openFileInput() {
     document.getElementById('fileInput')?.click();
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+    this.convertirImagenABase64(file);
     if (file) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -118,4 +138,14 @@ export class AddWorkerComponent {
       };
     }
   }
+
+  convertirImagenABase64(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      this.imagenBase64 = base64String;
+    };
+    reader.readAsDataURL(file);
+  }
+
 }

@@ -26,16 +26,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="">
-          <td class="text-uppercase">Brandon Ramiro Toapanta Basantes</td>
-          <td>3</td>
-          <td class="text-uppercase">VIGENTE</td>
-      </tr>
-      <tr class="">
-          <td class="text-uppercase">Brandon Ramiro Toapanta Basantes</td>
-          <td>3</td>
-          <td class="text-uppercase">VIGENTE</td>
-      </tr>
+      @for (empleado of empleadosList; track $index) {
+        <tr class="" routerLink="edit-worker/{{empleado.id}}">
+          <td class="text-uppercase">{{empleado.emp_nombres}} {{empleado.emp_apellidos}}</td>
+          <td>{{empleado.id}}</td>
+          <td class="text-uppercase">{{empleado.emp_status}}</td>
+        </tr>
+      }
     </tbody>
     <tfoot class="table-footer-group">
       <tr class="text-center">

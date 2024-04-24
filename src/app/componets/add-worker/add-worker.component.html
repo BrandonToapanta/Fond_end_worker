@@ -32,6 +32,7 @@
         <div class="form-group col-md-6">
           <label for="inputProvincia">Provincia</label>
           <select id="inputProvincia" class="form-control" formControlName="provincia">
+            <option value="">Escoja una provincia...</option>
             @for (provincia of provinciaList; track $index) {
                 <option value={{provincia.id}} >{{provincia.nombre_provincia}}</option>
             }
@@ -101,8 +102,9 @@
         <div class="form-group col-md-6">
           <label for="inputProvinciaLab">Provincia:</label>
           <select id="inputProvinciaLab" class="form-control" formControlName="prvinciaEmpresa">
+            <option value="">Escoja una provincia...</option>
             @for (provincia of provinciaList; track $index) {
-                <option selected value={{provincia.id}}>{{provincia.nombre_provincia}}</option>
+                <option value={{provincia.id}}>{{provincia.nombre_provincia}}</option>
             }
           </select>
         </div>
