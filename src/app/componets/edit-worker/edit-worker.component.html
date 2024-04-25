@@ -62,9 +62,9 @@
           <label for="inputFotografia">Fotografía: (Valida)</label>
           <div>
             @if (imageUrl) {
-            <img class="rounded-circle" [src]="imageUrl" alt="Imagen seleccionada" width="100px" height="100px" />
+            <img class="rounded-circle" id="foto" [src]="imageUrl" alt="Imagen seleccionada" width="100px" height="100px" />
             }@else{
-            <img class="rounded-circle" src="https://cdn-icons-png.flaticon.com/128/12136/12136841.png"
+            <img class="rounded-circle" id="foto" src="https://cdn-icons-png.flaticon.com/128/12136/12136841.png"
               alt="Imagen seleccionada" width="100px" height="100px" />
             }
             <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none" accept="image/*"

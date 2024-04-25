@@ -58,6 +58,8 @@ export class AddWorkerComponent implements OnInit {
   }
 
   formulario(): any {
+    const imgElement = document.getElementById('foto') as HTMLImageElement;
+    const srcValue = imgElement.getAttribute('src');
     let empleado = {
       emp_nombres: this.formularioEjemplo.value.nombres,
       emp_apellidos: this.formularioEjemplo.value.apellidos,
@@ -65,7 +67,7 @@ export class AddWorkerComponent implements OnInit {
       emp_fec_nacimiento: this.formularioEjemplo.value.Fnacimiento,
       emp_correo: this.formularioEjemplo.value.email,
       emp_obs_pers: this.formularioEjemplo.value.ObservacionesPerson,
-      emp_foto: this.imagenBase64,
+      emp_foto: srcValue,
       emp_fec_ingreso: this.formularioEjemplo.value.FIngreso,
       emp_cargo: this.formularioEjemplo.value.cargo,
       emp_departamento: this.formularioEjemplo.value.departamento,

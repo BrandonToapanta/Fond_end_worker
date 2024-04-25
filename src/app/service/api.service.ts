@@ -10,20 +10,32 @@ import { IProvincia, IEmpleados, IEmpleadoAdd } from '../models/provincia.model'
 export class ApiService {
 
 
-  url: string ='http://localhost/ejercicio-backend/';
+  url: string = 'http://localhost/ejercicio-backend/';
 
-  constructor(private clietHttp :HttpClient ){}
+  constructor(private clietHttp: HttpClient) { }
 
-  getprovinciaList(): Observable<IProvincia[]>{
+  getprovinciaList(): Observable<IProvincia[]> {
     return this.clietHttp.get<IProvincia[]>(`${this.url}provincia.php`);
   }
 
-  getempleadosList(): Observable<IEmpleados[]>{
+  getempleadosList(): Observable<IEmpleados[]> {
     return this.clietHttp.get<IEmpleados[]>(`${this.url}empleados.php`);
   }
 
-  postempleado(datosEmpleado: IEmpleadoAdd): Observable<any> {
-    return this.clietHttp.post(`${this.url}empleados.php`,datosEmpleado);
+  getempleado(id: string | number): Observable<any> {
+    return this.clietHttp.get(`${this.url}empleados.php?id=${id}`);
+  }
+
+  getbuscarEmpleados(id: string | number, nombre: string): Observable<any> {
+    return this.clietHttp.get(`${this.url}buscar.php?emp_nombres=${nombre}&id=${id}`);
+  }
+
+  postempleado(datosEmpleado: any): Observable<any> {
+    return this.clietHttp.post(`${this.url}empleados.php`, datosEmpleado);
+  }
+
+  putempleado(datosEmpleado: any): Observable<any> {
+    return this.clietHttp.put(`${this.url}empleados.php`, datosEmpleado);
   }
 
 }

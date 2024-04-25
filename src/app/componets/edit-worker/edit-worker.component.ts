@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { ApiService } from '../../service/api.service';
@@ -14,14 +14,38 @@ import { IProvincia } from '../../models/provincia.model';
   styleUrl: './edit-worker.component.css'
 })
 export class EditWorkerComponent implements OnInit {
-
   provinciaList: IProvincia[] = [];
-  imagenBase64?: string = '';
+  idWorker: any;
 
   imageUrl: string | ArrayBuffer | null = null;
+  imagenBase64?: string = '';
+
   formularioEjemplo!: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private apiService: ApiService, private Route: Router) {
+  constructor(public formBuilder: FormBuilder, private apiService: ApiService, private Route: Router, private activeRoute: ActivatedRoute) {
+    this.idWorker = this.activeRoute.snapshot.paramMap.get('id');
+
+    this.apiService.getempleado(this.idWorker).subscribe(res => {
+      this.imageUrl = res.emp_foto;
+      this.formularioEjemplo.setValue({
+        nombres: res.emp_nombres,
+        apellidos: res.emp_apellidos,
+        cedula: res.emp_cedula,
+        provincia: res.provPersona_id,
+        Fnacimiento: res.emp_fec_nacimiento,
+        email: res.emp_correo,
+        ObservacionesPerson: res.emp_obs_pers,
+        imagen: '',
+        FIngreso: res.emp_fec_ingreso,
+        cargo: res.emp_cargo,
+        departamento: res.emp_departamento,
+        prvinciaEmpresa: res.provLaboral_id,
+        salario: res.emp_salario,
+        JornadaParcial: res.emp_jor_parcial,
+        ObservacionesEmpresariales: res.emp_obs_lab,
+      });
+    });
+
     this.formularioEjemplo = this.formBuilder.group({
       nombres: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -52,10 +76,11 @@ export class EditWorkerComponent implements OnInit {
     this.apiService.getprovinciaList().subscribe((data: IProvincia[]) => {
       this.provinciaList = data;
     });
-
   }
 
   formulario(): any {
+    const imgElement = document.getElementById('foto') as HTMLImageElement;
+    const srcValue = imgElement.getAttribute('src');
     let empleado = {
       emp_nombres: this.formularioEjemplo.value.nombres,
       emp_apellidos: this.formularioEjemplo.value.apellidos,
@@ -63,7 +88,7 @@ export class EditWorkerComponent implements OnInit {
       emp_fec_nacimiento: this.formularioEjemplo.value.Fnacimiento,
       emp_correo: this.formularioEjemplo.value.email,
       emp_obs_pers: this.formularioEjemplo.value.ObservacionesPerson,
-      emp_foto: this.imagenBase64,
+      emp_foto: srcValue,
       emp_fec_ingreso: this.formularioEjemplo.value.FIngreso,
       emp_cargo: this.formularioEjemplo.value.cargo,
       emp_departamento: this.formularioEjemplo.value.departamento,
@@ -74,7 +99,9 @@ export class EditWorkerComponent implements OnInit {
       provLaboral_id: this.formularioEjemplo.value.prvinciaEmpresa,
     }
     console.log(empleado)
-    this.apiService.postempleado(empleado).subscribe();
+
+    this.apiService.putempleado(empleado).subscribe();
+    this.Route.navigateByUrl('');
   }
 
   ContinuarForm() {
