@@ -1,27 +1,65 @@
-# Ejercicio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+# API REST WORKERS
 
-## Development server
+API REST para sistema de empleados, donde permite ingresar, actualizar, buscar, ordenar los empleados.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Instalacion 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Clonar el back-end/ repositorio [api_worker](https://github.com/BrandonToapanta/api_worker)
 
-## Build
+```bash
+  git clone https://github.com/BrandonToapanta/api_worker.git
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Clonar el [front-end](https://github.com/BrandonToapanta/Fond_end_worker)
 
-## Running unit tests
+```bash
+  git clone https://github.com/BrandonToapanta/Fond_end_worker.git
+```
+- Verifica la versión de Angular en la terminal. Debe ser la versión `17.3.5`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+  ng version
+```
+- Si es menor a esa versión, ejecuta el siguiente comando.
 
-## Running end-to-end tests
+```bash
+  npm install -g @angular/cli
+```
+- Abre el proyecto en tu terminal y luego instala npm en el proyecto.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+  npm i
+```
+- Por último, ejecuta el proyecto.
+```bash
+  ng serve
+```
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Cambiar URL de API REST
+
+Ingresa al apartado de src/app/service/api.service.ts y edita la variable url con la dirección URL donde colocaste la API. Para obtener la API, dirígete a localhost de tu servicio de PHP, ingresa el nombre de la carpeta http://localhost/tu-nombre-carpeta/ y utiliza esa URL.
+
+```typescript
+url: string = 'http://localhost/tu-nombre-carpeta/';
+```
+
+
+## Stack
+
+**Front-end:** Angular 17, Bootstrap 4.6
+
+**Back-end:** PHP
+
+**Data Base:** MySQL
+
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://brandontoapanta.netlify.app/)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/brandon-toapanta-8a87b4199/)
+
+
