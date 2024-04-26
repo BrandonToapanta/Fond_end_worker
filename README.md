@@ -41,7 +41,7 @@ API REST para sistema de empleados, donde permite ingresar, actualizar, buscar, 
 
 ## Cambiar URL de API REST
 
-Ingresa al apartado de src/app/service/api.service.ts y edita la variable url con la dirección URL donde colocaste la API. Para obtener la API, dirígete a localhost de tu servicio de PHP, ingresa el nombre de la carpeta http://localhost/tu-nombre-carpeta/ y utiliza esa URL.
+Ingresa al apartado de `src/app/service/api.service.ts` y edita la variable `url` con la dirección URL donde colocaste la API. Para obtener la API, dirígete a localhost de tu servicio de PHP, ingresa el nombre de la carpeta `http://localhost/tu-nombre-carpeta/` y utiliza esa URL.
 
 ```typescript
 url: string = 'http://localhost/tu-nombre-carpeta/';
