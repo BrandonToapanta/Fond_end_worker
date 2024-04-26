@@ -16,39 +16,72 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputNombres4">Nombres</label>
-          <input type="text" class="form-control" id="inputNombres4" formControlName="nombres" />
+          <input [ngClass]="{'is-invalid':hasErrors('nombres','required')}" type="text" class="form-control"
+            id="inputNombres4" formControlName="nombres" />
+          @if (hasErrors('nombres','required')) {
+          <div class="text-danger"> Nombres requeridos </div>
+          }
         </div>
         <div class="form-group col-md-6">
           <label for="inputApellidos4">Apellidos</label>
-          <input type="text" class="form-control" id="inputApellidos4" formControlName="apellidos" />
+          <input [ngClass]="{'is-invalid':hasErrors('apellidos','required')}" type="text" class="form-control"
+            id="inputApellidos4" formControlName="apellidos" />
+          @if (hasErrors('apellidos','required')) {
+          <div class="text-danger"> Apellidos requeridos </div>
+          }
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputCedula">Cédula: (Valida)</label>
-          <input type="text" class="form-control" id="inputCedula" formControlName="cedula" />
+          <input
+            [ngClass]="{'is-invalid':hasErrors('cedula','required')||hasErrors('cedula','minlength')||hasErrors('cedula','maxlength')}"
+            type="text" class="form-control" id="inputCedula" formControlName="cedula" />
+          @if (hasErrors('cedula','required')) {
+          <div class="text-danger"> Cedula requerida </div>
+          }
+          @if (hasErrors('cedula','minlength')) {
+          <div class="text-danger"> El minimo de caracteres es 10 </div>
+          }
+          @if (hasErrors('cedula','maxlength')) {
+          <div class="text-danger"> El maximo de caracteres es 10 </div>
+          }
         </div>
         <div class="form-group col-md-6">
           <label for="inputProvincia">Provincia</label>
-          <select id="inputProvincia" class="form-control" formControlName="provincia">
+          <select [ngClass]="{'is-invalid':hasErrors('provincia','required')}" id="inputProvincia" class="form-control"
+            formControlName="provincia">
             <option value="">Escoja una provincia...</option>
             @for (provincia of provinciaList; track $index) {
-                <option value={{provincia.id}} >{{provincia.nombre_provincia}}</option>
+            <option value={{provincia.id}}>{{provincia.nombre_provincia}}</option>
             }
           </select>
+          @if (hasErrors('provincia','required')) {
+          <div class="text-danger"> Provincia requerida </div>
+          }
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
-          <input type="date" class="form-control" id="inputFechaNacimiento" formControlName="Fnacimiento" />
+          <input [ngClass]="{'is-invalid':hasErrors('Fnacimiento','required')}" type="date" class="form-control"
+            id="inputFechaNacimiento" formControlName="Fnacimiento" />
+          @if (hasErrors('Fnacimiento','required')) {
+          <div class="text-danger"> Fecha de nacimiento requerida </div>
+          }
         </div>
         <div class="form-group col-md-6">
           <label for="inputEmail">Email: (Valida)</label>
-          <input type="email" class="form-control" id="inputEmail" placeholder="correo-personal@email.com"
-            formControlName="email" />
+          <input [ngClass]="{'is-invalid':hasErrors('email','required')||hasErrors('email','email')}" type="email"
+            class="form-control" id="inputEmail" placeholder="correo-personal@email.com" formControlName="email" />
+          @if (hasErrors('email','required')) {
+          <div class="text-danger"> Email requerido </div>
+          }
+          @if (hasErrors('email','email')) {
+          <div class="text-danger"> Formato de email invalido </div>
+          }
         </div>
       </div>
 
@@ -62,7 +95,8 @@
           <label for="inputFotografia">Fotografía: (Valida)</label>
           <div>
             @if (imageUrl) {
-            <img class="rounded-circle" id="foto" [src]="imageUrl" alt="Imagen seleccionada" width="100px" height="100px" />
+            <img class="rounded-circle" id="foto" [src]="imageUrl" alt="Imagen seleccionada" width="100px"
+              height="100px" />
             }@else{
             <img class="rounded-circle" id="foto" src="https://cdn-icons-png.flaticon.com/128/12136/12136841.png"
               alt="Imagen seleccionada" width="100px" height="100px" />
@@ -86,27 +120,43 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputFechaIngreso">Fecha de Ingreso</label>
-          <input type="date" class="form-control" id="inputFechaIngreso" formControlName="FIngreso" />
+          <input [ngClass]="{'is-invalid':hasErrors('FIngreso','required')}" type="date" class="form-control"
+            id="inputFechaIngreso" formControlName="FIngreso" />
+          @if (hasErrors('FIngreso','required')) {
+          <div class="text-danger"> Fecha de ingreso requerida </div>
+          }
         </div>
         <div class="form-group col-md-6">
           <label for="inputCargo">Cargo</label>
-          <input type="text" class="form-control" id="inputCargo" formControlName="cargo" />
+          <input [ngClass]="{'is-invalid':hasErrors('cargo','required')}" type="text" class="form-control"
+            id="inputCargo" formControlName="cargo" />
+          @if (hasErrors('cargo','required')) {
+          <div class="text-danger"> Cargo requerido </div>
+          }
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="inputDepartamento">Departamento:</label>
-          <input type="text" class="form-control" id="inputDepartamento" formControlName="departamento" />
+          <input [ngClass]="{'is-invalid':hasErrors('departamento','required')}" type="text" class="form-control"
+            id="inputDepartamento" formControlName="departamento" />
+          @if (hasErrors('departamento','required')) {
+          <div class="text-danger"> Departamento requerido </div>
+          }
         </div>
         <div class="form-group col-md-6">
           <label for="inputProvinciaLab">Provincia:</label>
-          <select id="inputProvinciaLab" class="form-control" formControlName="prvinciaEmpresa">
+          <select [ngClass]="{'is-invalid':hasErrors('prvinciaEmpresa','required')}" id="inputProvinciaLab"
+            class="form-control" formControlName="prvinciaEmpresa">
             <option value="">Escoja una provincia...</option>
             @for (provincia of provinciaList; track $index) {
-                <option value={{provincia.id}}>{{provincia.nombre_provincia}}</option>
+            <option value={{provincia.id}}>{{provincia.nombre_provincia}}</option>
             }
           </select>
+          @if (hasErrors('prvinciaEmpresa','required')) {
+          <div class="text-danger"> Provincia requerida </div>
+          }
         </div>
       </div>
 
@@ -114,10 +164,13 @@
         <div class="form-group col-md-6">
           <label for="inputSalario">Salario:</label>
           <div class="m-0 d-flex">
-            <input type="number" class="form-control col-6" id="inputSalario" min="0" placeholder="1000"
-              formControlName="salario" />
+            <input [ngClass]="{'is-invalid':hasErrors('salario','required')}" type="number" class="form-control col-6"
+              id="inputSalario" min="0" placeholder="1000" formControlName="salario" />
             <span class="ml-2 align-self-center">USD</span>
           </div>
+          @if (hasErrors('salario','required')) {
+          <div class="text-danger"> Salario requerido </div>
+          }
         </div>
         <div class="form-group col-md-6">
           <label for="inputJornada">Jornada Parcial</label>
@@ -127,6 +180,9 @@
             <input class="ml-4" type="radio" id="NoJornadaParcial" value="No" formControlName="JornadaParcial" />
             <label for="NoJornadaParcial">No</label>
           </fieldset>
+          @if (hasErrors('JornadaParcial','required')) {
+          <div class="text-danger"> Jornada requerida </div>
+          }
         </div>
       </div>
 

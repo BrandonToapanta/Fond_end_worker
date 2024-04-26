@@ -22,8 +22,16 @@ export class ApiService {
     return this.clietHttp.get<IEmpleados[]>(`${this.url}empleados.php`);
   }
 
+  getreporte(): Observable<any> {
+    return this.clietHttp.get(`${this.url}reporte.php`);
+  }
+
   getempleado(id: string | number): Observable<any> {
     return this.clietHttp.get(`${this.url}empleados.php?id=${id}`);
+  }
+
+  getreporteOrden(parametro:string,contador:number): Observable<any> {
+    return this.clietHttp.get(`${this.url}reporte.php?${parametro}=${contador}`);
   }
 
   getbuscarEmpleados(id: string | number, nombre: string): Observable<any> {

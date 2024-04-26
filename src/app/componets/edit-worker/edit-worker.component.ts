@@ -26,7 +26,7 @@ export class EditWorkerComponent implements OnInit {
     this.idWorker = this.activeRoute.snapshot.paramMap.get('id');
 
     this.apiService.getempleado(this.idWorker).subscribe(res => {
-      this.imageUrl = res.emp_foto;
+      this.imageUrl = res?.emp_foto;
       this.formularioEjemplo.setValue({
         nombres: res.emp_nombres,
         apellidos: res.emp_apellidos,
@@ -34,7 +34,7 @@ export class EditWorkerComponent implements OnInit {
         provincia: res.provPersona_id,
         Fnacimiento: res.emp_fec_nacimiento,
         email: res.emp_correo,
-        ObservacionesPerson: res.emp_obs_pers,
+        ObservacionesPerson: res?.emp_obs_pers,
         imagen: '',
         FIngreso: res.emp_fec_ingreso,
         cargo: res.emp_cargo,
@@ -42,7 +42,7 @@ export class EditWorkerComponent implements OnInit {
         prvinciaEmpresa: res.provLaboral_id,
         salario: res.emp_salario,
         JornadaParcial: res.emp_jor_parcial,
-        ObservacionesEmpresariales: res.emp_obs_lab,
+        ObservacionesEmpresariales: res?.emp_obs_lab,
       });
     });
 
@@ -72,10 +72,16 @@ export class EditWorkerComponent implements OnInit {
     });
   }
 
+  hasErrors(controlName: string, errorType: string) {
+    return this.formularioEjemplo.get(controlName)?.hasError(errorType) && this.formularioEjemplo.get(controlName)?.touched
+  }
+
   ngOnInit(): void {
     this.apiService.getprovinciaList().subscribe((data: IProvincia[]) => {
       this.provinciaList = data;
     });
+
+    this.formularioEjemplo.get('cedula')?.disable();
   }
 
   formulario(): any {
@@ -100,8 +106,18 @@ export class EditWorkerComponent implements OnInit {
     }
     console.log(empleado)
 
-    this.apiService.putempleado(empleado).subscribe();
-    this.Route.navigateByUrl('');
+    if (this.formularioEjemplo.valid) {
+      this.apiService.putempleado(empleado).subscribe({
+        next: () => {
+          this.Route.navigateByUrl('');
+        },
+        error: (error) => {
+          alert(`Error al enviar el empleado. ${error.error.text}`);
+        }
+      });
+    } else {
+      alert('Llenar todos los campos necesarios');
+    }
   }
 
   ContinuarForm() {

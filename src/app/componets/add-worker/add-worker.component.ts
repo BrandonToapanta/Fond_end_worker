@@ -31,7 +31,7 @@ export class AddWorkerComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(9),
+          Validators.minLength(10),
           Validators.maxLength(10),
         ],
       ],
@@ -48,6 +48,10 @@ export class AddWorkerComponent implements OnInit {
       JornadaParcial: ['', Validators.required],
       ObservacionesEmpresariales: [''],
     });
+  }
+
+  hasErrors(controlName: string, errorType: string) {
+    return this.formularioEjemplo.get(controlName)?.hasError(errorType) && this.formularioEjemplo.get(controlName)?.touched
   }
 
   ngOnInit(): void {
@@ -77,8 +81,20 @@ export class AddWorkerComponent implements OnInit {
       provPersona_id: this.formularioEjemplo.value.provincia,
       provLaboral_id: this.formularioEjemplo.value.prvinciaEmpresa,
     }
-    this.apiService.postempleado(empleado).subscribe();
-    this.Route.navigateByUrl('');
+
+    if (this.formularioEjemplo.valid) {
+      this.apiService.postempleado(empleado).subscribe({
+        next: () => {
+          this.Route.navigateByUrl('');
+        },
+        error: (error) => {
+          alert(`Error al enviar el empleado. ${error.error.text}`);
+        }
+      });
+    } else {
+      alert('Llenar todos los campos necesarios');
+    }
+
   }
 
   ContinuarForm() {

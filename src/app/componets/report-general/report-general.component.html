@@ -5,31 +5,33 @@
 <table  class="table" id="report">
   <thead class="table-primary">
     <tr>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Nombre</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Cedula</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Codigo</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Departamento</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Cargo</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">FEC. ING.</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Status</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Sueldo</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Email</button></th>
-      <th scope="col"><button class="btn text-uppercase font-weight-bold">Provincia</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarNombre()">Nombre</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarCedula()">Cedula</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarCodigo()">Codigo</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarDepartamento()">Departamento</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarCargo()">Cargo</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarFecha()">FEC. ING.</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarStatus()">Status</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarSueldo()">Sueldo</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarEmail()">Email</button></th>
+      <th scope="col"><button class="btn text-uppercase font-weight-bold" (click)="ordenarProvincia()">Provincia</button></th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    <tr>
-      <td>Brandon Ramiro Toapanta Basantes</td>
-      <td>1753029659</td>
-      <td>1</td>
-      <td>nose</td>
-      <td>jefe</td>
-      <td>24/02/11</td>
-      <td>Vigente</td>
-      <td>1000</td>
-      <td>{{"bt@gmail.com"}}</td>
-      <td>pichincha</td>
-    </tr>
+    @for (item of reporteGeneral; track $index) {
+      <tr>
+        <td class="text-uppercase">{{item.emp_nombres}} {{item.emp_apellidos}}</td>
+        <td class="text-uppercase">{{item.emp_cedula}}</td>
+        <td class="text-uppercase">{{item.id}}</td>
+        <td class="text-uppercase">{{item.emp_departamento}}</td>
+        <td class="text-uppercase">{{item.emp_cargo}}</td>
+        <td class="text-uppercase">{{item.emp_fec_ingreso}}</td>
+        <td class="text-uppercase">{{item.emp_status}}</td>
+        <td class="text-uppercase">{{item.emp_salario}}</td>
+        <td>{{item.emp_correo}}</td>
+        <td class="text-uppercase">{{item.nombre_provincia}}</td>
+      </tr>
+    }
 
   </tbody>
 </table>
